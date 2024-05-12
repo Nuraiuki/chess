@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style1.css">
+
+    <title>Chess </title>
+
+</head>
+
+<body>
+
+    <header>
+        <h1>Chess Introduction</h1>
+        <nav>
+            <ul>
+                <li><a href="chess.html">Главная</a></li>
+                <li><a href="rules.html">Правила </a></li>
+                <li><a href="https://www.chess.com/ru">Играть </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="center-text">
+            <p>Шахматная доска имеет форму правильного квадрата, каждая сторона состоит из 8 клеток. Шахматисты называют их полями. В отличие от шашек, все клетки, 32 черных и 32 белых задействуются в игре.</p>
+            <ul>
+                <li>Доска устанавливается таким образом, чтобы у каждого партнера крайней правой была клетка белого цвета.</li>
+                <li>Черные и белые фигуры противников располагаются симметрично.</li>
+                <li>В первоначальной позиции фигуры занимают 2 первых ряда.</li>
+            </ul>
+        </div>
+        <div class="chessb" id="chessb"></div>
+
+        <h1 class="center-text">Расположение на доске:</h1>
+        <div class="desk">
+            <img src="доска.jpeg" alt="Chessboard" class="board-img">
+            <div class="board-info">
+                <p>В первоначальной расстановке фигур на шахматной доске строго соблюдаются правила, предусматривающие для каждой 
+                    единицы определенное место. Позже в процессе игры они будут перемещаться по всей доске, но перед игрой
+                     они должны занимать определенную позицию. 
+                  Порядок установки:</p>
+          
+<div class="container">
+    <p>На крайние клетки черную и белую поставить ладьи;</p>
+    <p>Около них располагаются кони;</p>
+    <p>Следующими устанавливаются слоны;</p>
+    <p>Последними ставятся король и ферзь;</p>
+    <p>Пешки устанавливаются на следующей горизонтали в ряд перед главными фигурами.</p>
+</div>
+                <p>В каждом наборе по 2 ладьи, коня, слона. Эти фигуры занимают белую и черную клетку в диагонали. 
+                    Соблюдение правила обеспечит правильность совершения ходов. После установки всех фигур можно приступать к игре. Посмотреть, как это выглядит, можно на картинке.</p>
+            </div>
+        </div>
+        <div class="center-text show-registration-form">
+            <img src="icons8-вниз-в-квадрате-100.png" alt="Arrow" style="cursor: pointer;">
+        </div>
+
+            <div class="registration-form-container">
+                <div class="close-button" onclick="closeRegistrationForm()">X</div>
+        
+                <form>
+                    <h3>Чтобы увидеть дальше заполните форму</h3>
+                    <label for="name">имя:</label>
+                    <input type="text" id="name" name="name" required>
+        
+                    <label for="email">почта:</label>
+                    <input type="email" id="email" name="email" required>
+        
+                    <label for="phone">телефон:</label>
+                    <input type="tel" id="phone" name="phone" required>
+      
+        
+                    <label for="payment">способ оплаты</label>
+                    <select id="payment" name="payment">
+                        <option value="credit_card">kaspi</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="bitcoin">halyk</option>
+                        <option value="other">Other</option>
+
+                    </select>
+                 
+        
+                    <input type="text" id="otherPayment" name="otherPayment" class="other-payment-input" placeholder="Enter other payment method">
+
+                    <button type="submit" onclick="showMessage()">Закончить</button>
+                </form>
+            </div>
+    </main>
+
+
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const chessboard = document.getElementById('chessb');
+    const cells = [];
+
+    for (let row = 8; row >= 1; row--) {
+        for (let col = 0; col < 8; col++) {
+            const isWhite = (row + col) % 2 === 0;
+            const cell = document.createElement('div');
+            cell.className = 'cell ' + (isWhite ? 'white' : 'black');
+            if (row === 8) {
+                cell.textContent = String.fromCharCode(97 + col);
+            } else if (col === 0) {
+                cell.textContent = row;
+            }
+
+            cell.addEventListener('click', function () {
+                toggleBoardColor();
+            });
+
+            chessboard.appendChild(cell);
+            cells.push(cell);
+        }
+    }
+
+    let isPink = false;
+
+    function toggleBoardColor() {
+        isPink = !isPink;
+
+        cells.forEach(cell => {
+            if (!cell.classList.contains('white')) {
+                cell.style.backgroundColor = isPink ? 'grey' : 'black';
+            }
+        });
+    }
+});
+
+        function closeRegistrationForm() {
+            document.querySelector('.registration-form-container').style.display = 'none';
+        }
+
+        function showMessage() {
+            alert("Спасибо вам!Скоро свяжемся с вами насчет курса 'Лидер шахмата'.");
+        }
+     
+        function handlePaymentMethodChange(select) {
+            const otherPaymentInput = document.getElementById('otherPayment');
+            if (select.value === 'other') {
+                otherPaymentInput.style.display = 'block';
+            } else {
+                otherPaymentInput.style.display = 'none';
+            }
+        } 
+        document.querySelector('.show-registration-form img').addEventListener('click', function () {
+            document.querySelector('.registration-form-container').style.display = 'block';
+        });
+
+
+    </script>
+</body>
+
+</html>
